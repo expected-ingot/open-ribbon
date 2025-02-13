@@ -118,7 +118,11 @@ INCLUDE_ASM("asm/game/nonmatchings/MemorySys", func_800231C4);
 
 INCLUDE_ASM("asm/game/nonmatchings/MemorySys", func_800231F4);
 
-INCLUDE_ASM("asm/game/nonmatchings/MemorySys", func_80023210);
+s32 func_80023210(s32 value) {
+    // This rounds up a value to the nearest multiple of 4
+    // maybe for memory alignment? align to  4 bytes?
+    return (value + 3) & ~3;
+}
 
 INCLUDE_ASM("asm/game/nonmatchings/MemorySys", func_80023220);
 

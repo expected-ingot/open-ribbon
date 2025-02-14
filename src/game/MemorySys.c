@@ -207,7 +207,26 @@ INCLUDE_ASM("asm/game/nonmatchings/MemorySys", func_800245CC);
 
 INCLUDE_ASM("asm/game/nonmatchings/MemorySys", func_800246EC);
 
+#ifndef NON_MATCHING
 INCLUDE_ASM("asm/game/nonmatchings/MemorySys", func_80024820);
+#else
+extern int (*D_80048028)();
+
+void func_80024820(s32 arg0) {
+    // if you do `var_v0 = exit(1);` then it matches up ALMOST perfectly (only 1 instruction difference)
+    // but it errors out the compiler
+    int (*var_v0)();
+
+    do {
+        var_v0 = D_80048028;
+        if (var_v0 == NULL) {
+            printf("out of memory\n");
+            exit(1);
+        }
+        var_v0();
+    } while (MemorySys__malloc(arg0) == 0);
+}
+#endif
 
 void func_8002487C(void) {}
 

@@ -10,16 +10,7 @@ INCLUDE_ASM("asm/game/nonmatchings/MemorySys", MemorySys__Init);
 
 void func_80021758(void) {} // MemorySys__Stub [Empty]
 
-#ifndef NON_MATCHING
 INCLUDE_ASM("asm/game/nonmatchings/MemorySys", MemorySys__Info);
-#else
-void MemorySys__free(s32 address) {
-    if (address != 0) {
-        func_8003439C();
-        freeAmount += 1;
-    }
-}
-#endif
 
 INCLUDE_ASM("asm/game/nonmatchings/MemorySys", MemorySys__DumpUsage);
 
@@ -29,7 +20,16 @@ INCLUDE_ASM("asm/game/nonmatchings/MemorySys", MemorySys__Init01);
 
 INCLUDE_ASM("asm/game/nonmatchings/MemorySys", MemorySys__malloc);
 
+#ifndef NON_MATCHING
 INCLUDE_ASM("asm/game/nonmatchings/MemorySys", MemorySys__free);
+#else
+void MemorySys__free(s32 address) {
+    if (address != 0) {
+        func_8003439C();
+        freeAmount += 1;
+    }
+}
+#endif
 
 INCLUDE_ASM("asm/game/nonmatchings/MemorySys", MemorySys__CountHeapFree);
 
@@ -128,8 +128,7 @@ INCLUDE_ASM("asm/game/nonmatchings/MemorySys", func_800231C4);
 INCLUDE_ASM("asm/game/nonmatchings/MemorySys", func_800231F4);
 
 s32 func_80023210(s32 value) {
-    // This rounds up a value to the nearest multiple of 4
-    // maybe for memory alignment? align to  4 bytes?
+    // rounds up a value to the nearest multiple of 4
     return (value + 3) & ~3;
 }
 
@@ -137,7 +136,6 @@ s32 func_80023210(s32 value) {
 INCLUDE_ASM("asm/game/nonmatchings/MemorySys", func_80023220);
 #else
 s32 func_80023220(s8* first_string, s8* second_string) {
-    // i think this is something to compare strings
     // https://decomp.me/scratch/MVnJF
     s8 current_character = *first_string;
     s8 other_character = *second_string;
@@ -187,12 +185,10 @@ s32 func_80023388(void) {
 INCLUDE_ASM("asm/game/nonmatchings/MemorySys", main);
 
 s32 func_80023A7C(s32 arg0, s32 arg1, s32 arg2) {
-    // to be completely honest i have no fucking idea
     return arg0 + (arg2 - arg1);
 }
 
 s32 func_80023A88(s32 arg0, s32 arg1, s32 arg2) {
-    // same as above?
     return arg0 + (arg2 - arg1);
 }
 
@@ -202,19 +198,15 @@ void func_80023AF0(void) {}
 
 INCLUDE_ASM("asm/game/nonmatchings/MemorySys", func_80023AF8);
 
-#ifndef NON_MATCHING
-INCLUDE_ASM("asm/game/nonmatchings/MemorySys", func_80023B08);
-INCLUDE_ASM("asm/game/nonmatchings/MemorySys", func_80023B14);
-#else
-// i have no idea how to get these to use v0 rather than a0
-void func_80023B08(s32* arg0) {
+s32* func_80023B08(s32* arg0) {
     *arg0 = 0;
+    return arg0;
 }
 
-void func_80023B14(s32* arg0) {
+s32* func_80023B14(s32* arg0) {
     *arg0 = 0;
+    return arg0;
 }
-#endif
 
 INCLUDE_ASM("asm/game/nonmatchings/MemorySys", func_80023B20);
 
@@ -232,8 +224,6 @@ INCLUDE_ASM("asm/game/nonmatchings/MemorySys", func_80024820);
 extern int (*D_80048028)();
 
 void func_80024820(s32 arg0) {
-    // if you do `var_v0 = exit(1);` then it matches up ALMOST perfectly (only 1 instruction difference)
-    // but it errors out the compiler
     int (*var_v0)();
 
     do {

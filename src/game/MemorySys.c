@@ -157,17 +157,35 @@ s32 func_80023220(s8* first_string, s8* second_string) {
 }
 #endif
 
-INCLUDE_ASM("asm/game/nonmatchings/MemorySys", func_800232A0);
+s32 func_800232A0(s32 arg0) {
+    return arg0 + func_80023210(func_80035C6C() + 1);
+}
 
 INCLUDE_ASM("asm/game/nonmatchings/MemorySys", func_800232D0);
 
-INCLUDE_ASM("asm/game/nonmatchings/MemorySys", func_80023388);
+s32 func_80023388(void) {
+    s32 temp_return_value;
+
+    temp_return_value = func_800232D0();
+
+    if (temp_return_value != 0) {
+        return func_800232A0(temp_return_value); 
+    }
+
+    return 0;
+}
 
 INCLUDE_ASM("asm/game/nonmatchings/MemorySys", main);
 
-INCLUDE_ASM("asm/game/nonmatchings/MemorySys", func_80023A7C);
+s32 func_80023A7C(s32 arg0, s32 arg1, s32 arg2) {
+    // to be completely honest i have no fucking idea
+    return arg0 + (arg2 - arg1);
+}
 
-INCLUDE_ASM("asm/game/nonmatchings/MemorySys", func_80023A88);
+s32 func_80023A88(s32 arg0, s32 arg1, s32 arg2) {
+    // same as above?
+    return arg0 + (arg2 - arg1);
+}
 
 INCLUDE_ASM("asm/game/nonmatchings/MemorySys", func_80023A94);
 

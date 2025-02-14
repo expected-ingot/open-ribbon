@@ -10,7 +10,16 @@ INCLUDE_ASM("asm/game/nonmatchings/MemorySys", MemorySys__Init);
 
 void func_80021758(void) {} // MemorySys__Stub [Empty]
 
+#ifndef NON_MATCHING
 INCLUDE_ASM("asm/game/nonmatchings/MemorySys", MemorySys__Info);
+#else
+void MemorySys__free(s32 address) {
+    if (address != 0) {
+        func_8003439C();
+        freeAmount += 1;
+    }
+}
+#endif
 
 INCLUDE_ASM("asm/game/nonmatchings/MemorySys", MemorySys__DumpUsage);
 
@@ -193,9 +202,19 @@ void func_80023AF0(void) {}
 
 INCLUDE_ASM("asm/game/nonmatchings/MemorySys", func_80023AF8);
 
+#ifndef NON_MATCHING
 INCLUDE_ASM("asm/game/nonmatchings/MemorySys", func_80023B08);
-
 INCLUDE_ASM("asm/game/nonmatchings/MemorySys", func_80023B14);
+#else
+// i have no idea how to get these to use v0 rather than a0
+void func_80023B08(s32* arg0) {
+    *arg0 = 0;
+}
+
+void func_80023B14(s32* arg0) {
+    *arg0 = 0;
+}
+#endif
 
 INCLUDE_ASM("asm/game/nonmatchings/MemorySys", func_80023B20);
 

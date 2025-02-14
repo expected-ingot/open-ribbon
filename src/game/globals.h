@@ -2,7 +2,7 @@
 
 #include <psyq/LIBGTE.H>
 
-void exit(s32);
+__attribute__((noreturn)) void exit(s32 arg0);
 s32 printf(char* format, ...);
 
 void SwEnterCriticalSection();

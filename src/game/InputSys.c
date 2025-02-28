@@ -16,7 +16,11 @@ INCLUDE_ASM("asm/game/nonmatchings/InputSys", InputSys__Unk00);
 
 INCLUDE_ASM("asm/game/nonmatchings/InputSys", InputSys__Unk01);
 
-INCLUDE_ASM("asm/game/nonmatchings/InputSys", func_800207C4);
+extern void D_8003FDCC;
+
+void* func_800207C4(void) {
+    return &D_8003FDCC;
+}
 
 INCLUDE_ASM("asm/game/nonmatchings/InputSys", func_800207D0);
 

@@ -117,15 +117,29 @@ s32 func_80023060(SVECTOR* vec1, SVECTOR* vec2)
 
 INCLUDE_ASM("asm/game/nonmatchings/MemorySys", func_8002310C);
 
-INCLUDE_ASM("asm/game/nonmatchings/MemorySys", func_80023174);
+void func_80023174(s32* arg0) {
+    *arg0 = 0;
+}
 
-INCLUDE_ASM("asm/game/nonmatchings/MemorySys", func_8002317C);
+void func_8002317C(UnkStruct09* arg0, int arg1) {
+    arg0->unk48 = func_800231F4(arg1);
+}
 
 INCLUDE_ASM("asm/game/nonmatchings/MemorySys", func_800231A8);
 
 INCLUDE_ASM("asm/game/nonmatchings/MemorySys", func_800231C4);
 
-INCLUDE_ASM("asm/game/nonmatchings/MemorySys", func_800231F4);
+extern int D_8003FE8C;
+
+s32 func_800231F4(s32 arg0) {
+    s32 var_v1;
+
+    var_v1 = 0;
+    if (arg0 != &D_8003FE8C) {
+        var_v1 = arg0;
+    }
+    return var_v1;
+}
 
 s32 func_80023210(s32 value) {
     // rounds up a value to the nearest multiple of 4
@@ -268,11 +282,23 @@ INCLUDE_ASM("asm/game/nonmatchings/MemorySys", func_800258B0);
 
 INCLUDE_ASM("asm/game/nonmatchings/MemorySys", func_80025954);
 
-INCLUDE_ASM("asm/game/nonmatchings/MemorySys", func_80025B18);
+extern int D_8003FE8C;
+
+s32 func_80025B18(s32 arg0) {
+    s32 var_v1;
+
+    var_v1 = 0;
+    if (arg0 != &D_8003FE8C) {
+        var_v1 = arg0;
+    }
+    return var_v1;
+}
 
 void TmdLineObj__Unk12(s32* arg0) { *arg0 = 0; }
 
-INCLUDE_ASM("asm/game/nonmatchings/MemorySys", func_80025B3C);
+void func_80025B3C(UnkStruct09* arg0, int arg1) {
+    arg0->unk48 = func_80025B18(arg1);
+}
 
 INCLUDE_ASM("asm/game/nonmatchings/MemorySys", func_80025B68);
 
